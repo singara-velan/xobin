@@ -1,0 +1,53 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="todoApp">
+<head>
+    <!-- META -->
+    <!-- Optimize mobile viewport -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hackathon App</title>
+
+    <!-- Load Bootstrap and Todo App sytlesheets -->
+    <link rel="stylesheet" href="./styles/bootstrap.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <!-- Load Angular -->
+    <script src="./scripts/ng/angular.js"></script>
+    <script src="./scripts/ng/angular-route.js"></script>
+    <script src="./scripts/ng/ui-bootstrap-tpls-2.3.1.min.js"></script>
+    <script src="./scripts/ng/angular-sanitize.js"></script>
+
+    <!-- Load Todo App scripts -->
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/directives/directive.js"></script>
+    <script src="./scripts/controllers/headerController.js"></script>
+    <script src="./scripts/controllers/postsController.js"></script>
+    <script src="./scripts/services/logService.js"></script>
+    <script src="./scripts/services/postsService.js"></script>
+
+</head>
+
+<body>
+    <header ng-controller="HeaderController as vm">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#/">Hackathon App</a>
+                    <ul class="nav navbar-nav">
+                       <li ng-class="{ active: isActive('/') }"><a href="#/">Posts</a></li>
+                   </ul>
+                </div>
+                <p class="navbar-text navbar-right">{{vm.dt | date:'mm/dd/yyyy hh:mm'}}</p>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid view-container">
+        <div ng-view></div>
+    </div>
+
+</body>
+</html>
