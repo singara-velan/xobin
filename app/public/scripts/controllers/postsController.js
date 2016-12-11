@@ -10,6 +10,7 @@ angular.module('todoApp')
 
         $scope.pageChanged = function() {
             getPagedData();
+            document.body.scrollTop = 0;
         };
 
         function getPagedData() {
@@ -20,7 +21,6 @@ angular.module('todoApp')
         }
 
         vm.getUser = function(id, post) {
-            console.log(id);
             var filtered = $filter('filter')(vm.users, function(val) {
                 if (val.$.Id === id) {
                     return true;
@@ -29,6 +29,7 @@ angular.module('todoApp')
             });
             if (filtered && filtered.length > 0) {
                 post.user = filtered[0].$;
+                post.upDownVotes = localStorage.getItem(post.$.Id);
                 return post.user.DisplayName;
             }
         };
@@ -44,6 +45,19 @@ angular.module('todoApp')
                 }
             });
         }
+
+        vm.upVote = function(post){
+          var count = Number(localStorage.getItem(post.$.Id));
+          if(isNaN(count)) count = 0;
+          window.localStorage.setItem(post.$.Id, Number(count) + 1);
+        };
+
+        vm.downVote = function(post){
+          var count = Number(localStorage.getItem(post.$.Id));
+          if(isNaN(count)) count = 0;
+          window.localStorage.setItem(post.$.Id, Number(count) - 1);
+        }
+
         vm.isBusy = true;
         postsService.get().then(
             function(response) {
@@ -51,7 +65,6 @@ angular.module('todoApp')
                 $scope.totalItems = response.data.posts.row.length;
                 $scope.bigTotalItems = $scope.totalItems;
                 getPagedData();
-                console.log(response.data.posts.row[0]);
                 logService.success('postsService.get()', response);
                 vm.isBusy = false;
             },

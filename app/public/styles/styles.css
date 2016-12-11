@@ -13,11 +13,14 @@ margin-bottom: 10px;
 .proPic{
   width: 30px;
   display: inline-block;
+  border-radius: 50%;
 }
 span > i{
   font-size: 12px;
 }
-
+.btn {
+      padding: 0px 6px;
+}
 .sk-folding-cube {
   margin: 20px auto;
   width: 40px;

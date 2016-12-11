@@ -14,13 +14,15 @@
         </br>
         <div>
             <span>
-                <i><img class="proPic" style="width:30px;" ng-src="{{post.user.ProfileImageUrl}}"/>
+                <i><img ng-if="post.user.ProfileImageUrl" class="proPic" style="width:30px;" ng-src="{{post.user.ProfileImageUrl}}"/>
                     <b>
                         <span class="user" ng-click="vm.showUser(post.user)" ng-bind="vm.getUser(post.$.OwnerUserId, post)"></span>
                     </b>
                 </i>
                 <i>Posted On:
                     {{post.$.CreationDate | date:'mm/dd/yyyy hh:mm a'}}</i>
+                    <span> &nbsp;<span>{{post.upDownVotes}}</span><button type="button" class="btn btn-success" ng-click="vm.upVote(post)">+</button>
+                    <button type="button" class="btn btn-warning" ng-click="vm.downVote(post)">-</button></span>
             </span>
             <span class="pull-right">Answers:
                 <span class="badge" style="background-color:green">{{post.$.AnswerCount ? post.$.AnswerCount : 0}}</span>
